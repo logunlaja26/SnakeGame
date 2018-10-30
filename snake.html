@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Snake Game</title>
+	</head>
+
+	<body>
+
+		<canvas id="gameCanvas" width="500" height="500"></canvas>
+
+
+		<script type="text/javascript">
+
+			var canvas; // variable holds contextual aspects of game canvas
+			var canvasBackground; // variable keeps track of actual objects of the canvas
+
+
+			window.onload = function() {
+				console.log("Hello World!");
+				canvas = document.getElementById('gameCanvas');
+				canvasBackground = canvas.getContext('2d');
+				canvasBackground.fillstyle = 'black';
+				canvasBackground.fillRect(0,0,canvas.width,canvas.height);
+
+			}
+			
+		</script>
+
+	</body>
+</html>
