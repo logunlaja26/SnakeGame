@@ -12,5 +12,5 @@
  9. Generating food for the snake
  10. Growing the snake 
  11. Keeping track of the score
- 12. End game
+ 12. End game. 
  
