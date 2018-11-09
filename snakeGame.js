@@ -20,7 +20,7 @@ window.onload = function() {
 		{x: 110, y: 150}
 	]
 
-	setInterval(drawSnakePart,3000)	
+	setInterval(function(){drawSnakePart(snakePart)},3000)	
 	snake.forEach(drawSnakePart)
 
 }
@@ -34,7 +34,7 @@ window.onload = function() {
 	function drawSnakePart(snakePart){
 	canvasBackground.fillStyle = 'blue';
 	canvasBackground.strokestyle = 'black';
-	canvasBackground.fillRect(snakePart.x + 10, snakePart.y, 10, 10);
-	canvasBackground.strokeRect(snakePart.x + 10, snakePart.y, 10, 10);		
+	canvasBackground.fillRect(snakePart.x + 30, snakePart.y, 10, 10);
+	canvasBackground.strokeRect(snakePart.x + 30, snakePart.y, 10, 10);		
 }
 
