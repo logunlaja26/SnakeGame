@@ -22,21 +22,45 @@ window.onload = function() {
 	]
 
 
-	setInterval(drawSnakePart,1000);	
+	setInterval(function(){drawSnakePart(snake[0]);},1000);	
 	snake.forEach(drawSnakePart)
 
 }
 
 	function drawSnakePart(snakePart){
 
-		snakePart.x = snakePart.x + 20
-		snakePart.y = snakePart.y + 20;
+		//snakePart.x = snakePart.x + 20;
+		//snakePart.y = snakePart.y + 20;
 
 		canvasBackground.fillStyle = 'blue';
 		canvasBackground.strokestyle = 'black';
 		canvasBackground.fillRect(snakePart.x , snakePart.y , 10, 10);
-		canvasBackground.strokeRect(snakePart.x , snakePart.y , 10, 10);	
+		canvasBackground.strokeRect(snakePart.x , snakePart.y , 10, 10);
+
+	function moveUp(snakePart){
+ 		snakePart.y = snakePart.y - 10;
+ 		return snake;
 
 
-}	
+}
+	snakePart = moveUp(snakePart)
+
+
+}
+ 	
+
+ 	
+
+     
+      
+
+
+
+
+
+
+
+
+
+
 
