@@ -3,49 +3,55 @@ var canvasBackground; // variable keeps track of actual objects of the canvas
 
 window.onload = function() {
 	console.log("SnakeGame");			
-	canvas = document.getElementById('gameCanvas');
-	canvasBackground = canvas.getContext('2d');
+	let canvas = document.getElementById('gameCanvas');
+	let canvasBackground = canvas.getContext('2d');
 	canvasBackground.fillStyle = 'black';
 	canvasBackground.fillRect(0,0,canvas.width,canvas.height);
-	canvasBackground.fillStyle = 'red';
-	canvasBackground.fillRect(250,200,20,20);
-	canvasBackground.fillStyle = 'white'
-	canvasBackground.fillRect(200,300,20,20);
-
+	
 	let snake = [
 		{x: 150, y: 150},
 		{x: 140, y: 150},
 		{x: 130, y: 150},
 		{x: 120, y: 150},
 		{x: 110, y: 150}
-
 	]
 
-
-	setInterval(function(){drawSnakePart(snake[0]);},1000);	
-	snake.forEach(drawSnakePart)
+	setInterval(function(){main(snake);},1000);	
+	//snake.forEach(drawSnakePart)
 
 }
 
-	function drawSnakePart(snakePart){
-
-		//snakePart.x = snakePart.x + 20;
-		//snakePart.y = snakePart.y + 20;
-
-		canvasBackground.fillStyle = 'blue';
-		canvasBackground.strokestyle = 'black';
-		canvasBackground.fillRect(snakePart.x , snakePart.y , 10, 10);
-		canvasBackground.strokeRect(snakePart.x , snakePart.y , 10, 10);
-
+function drawSnakePart(snakePart){
 	function moveUp(snakePart){
- 		snakePart.y = snakePart.y - 10;
- 		return snake;
+		snakePart.y = snakePart.y - 10;
+		return snakePart;
+	}
 
-
-}
 	snakePart = moveUp(snakePart)
 
+	let canvas = document.getElementById('gameCanvas');
+	let canvasBackground = canvas.getContext('2d');
+	canvasBackground.fillStyle = 'blue';
+	canvasBackground.strokestyle = 'blue';
+	canvasBackground.fillRect(snakePart.x , snakePart.y , 10, 10);
+	canvasBackground.strokeRect(snakePart.x , snakePart.y , 10, 10);
+}
 
+
+function drawCanvas(){
+	let canvas = document.getElementById('gameCanvas');
+	let canvasBackground = canvas.getContext('2d');
+	canvasBackground.fillStyle = 'black';
+	canvasBackground.fillRect(0,0,canvas.width,canvas.height);
+
+	// food object 
+	canvasBackground.fillStyle = 'red';
+	canvasBackground.fillRect(250,200,20,20);
+}
+
+function main(snake){
+	drawCanvas();
+	drawSnakePart(snake[0]);
 }
  	
 
