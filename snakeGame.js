@@ -43,15 +43,23 @@ function drawCanvas(){
 	let canvasBackground = canvas.getContext('2d');
 	canvasBackground.fillStyle = 'black';
 	canvasBackground.fillRect(0,0,canvas.width,canvas.height);
+}
 
-	// food object 
+function drawFood(){
+	let canvas = document.getElementById('gameCanvas');
+	let canvasBackground = canvas.getContext('2d');
 	canvasBackground.fillStyle = 'red';
-	canvasBackground.fillRect(250,200,20,20);
+	canvasBackground.fillRect(250,250,15,15);
 }
 
 function main(snake){
 	drawCanvas();
+	drawFood();
 	drawSnakePart(snake[0]);
+	drawSnakePart(snake[1]);
+	drawSnakePart(snake[2]);
+	drawSnakePart(snake[3]);
+	drawSnakePart(snake[4]);
 }
  	
 
