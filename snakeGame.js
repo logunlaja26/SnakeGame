@@ -19,26 +19,27 @@ window.onload = function() {
 	setInterval(function(){main(snake);},1000 );	
 
 	function main(snake){
-	drawCanvas();
-	drawFood();
+		drawCanvas();
+		drawFood();
 
-	let snakeCopy = [];
 
-	snake.forEach(function(snakePart){
-		snakeCopy.push(snakePart);
-	});
+		let snakeCopy = [];
 
-	snake[0] = {x: snakeCopy[0].x, y: snakeCopy[0].y - 10};
-	snake[1] = {x: snakeCopy[0].x, y: snakeCopy[0].y};
-	snake[2] = {x: snakeCopy[1].x, y: snakeCopy[1].y};
-	snake[3] = {x: snakeCopy[2].x, y: snakeCopy[2].y};
-	snake[4] = {x: snakeCopy[3].x, y: snakeCopy[3].y};
+		snake.forEach(function(snakePart){
+			snakeCopy.push(snakePart);
+		});
 
-	drawSnakePart(snake[0]);
-	drawSnakePart(snake[1]);
-	drawSnakePart(snake[2]);
-	drawSnakePart(snake[3]);
-	drawSnakePart(snake[4]);
+		snake[0] = {x: snakeCopy[0].x, y: snakeCopy[0].y - 10};
+		snake[1] = {x: snakeCopy[0].x, y: snakeCopy[0].y};
+		snake[2] = {x: snakeCopy[1].x, y: snakeCopy[1].y};
+		snake[3] = {x: snakeCopy[2].x, y: snakeCopy[2].y};
+		snake[4] = {x: snakeCopy[3].x, y: snakeCopy[3].y};
+
+		drawSnakePart(snake[0]);
+		drawSnakePart(snake[1]);
+		drawSnakePart(snake[2]);
+		drawSnakePart(snake[3]);
+		drawSnakePart(snake[4]);
 }
 	
 
