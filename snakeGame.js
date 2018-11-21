@@ -13,7 +13,9 @@ window.onload = function() {
 		{x: 140, y: 150},
 		{x: 130, y: 150},
 		{x: 120, y: 150},
-		{x: 110, y: 150}
+		{x: 110, y: 150},
+		{x: 90, y: 150}
+
 	]
 
 	setInterval(function(){main(snake);},1000 );	
