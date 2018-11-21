@@ -87,5 +87,25 @@ function drawFood(){
 	canvasBackground.fillRect(250,250,15,15);
 }
 
+<<<<<<< HEAD
+=======
+
+ 	
+
+ 	
+
+     
+      
+
+
+
+
+
+
+
+
+
+
+>>>>>>> bfd37ccedd46a4d163abd3d90e10b24c135a207b
 
 function()
