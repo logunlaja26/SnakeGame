@@ -86,3 +86,6 @@ function drawFood(){
 	canvasBackground.fillStyle = 'red';
 	canvasBackground.fillRect(250,250,15,15);
 }
+
+
+function()
