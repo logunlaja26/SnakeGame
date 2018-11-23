@@ -32,16 +32,15 @@ function main(snake){
 		snakeCopy.push(snakePart);
 	});
 
-	
-	//moveUp(snake, snakeCopy);
 	snake.forEach(function(snakePart){
 		drawSnakePart(snakePart);
-	})
+	});
 
-	document.onkeyup = whichKey;
+	document.onkeyup = function(event){
+		whichKey(event, snake, snakeCopy)
+	};
 	
 }
-
 
 function moveUp(snake,snakeCopy){
 	snake[0] = {x: snakeCopy[0].x, y: snakeCopy[0].y - 10};
@@ -51,17 +50,47 @@ function moveUp(snake,snakeCopy){
 	return snakeCopy;
 }
 
-function whichKey(event){
-	key = event.keyCode;
-		//canvasBackground.fillStyle = 'black';
-		//canvasBackground.fillRect(0,0,canvas.width,canvas.height);
-	switch(key){
-		case 38: // move up arrow
-			moveUp();
-			break;
+function moveDown(snake, snakeCopy){
+	snake[0] = {x: snakeCopy[0].x, y: snakeCopy[0].y + 10};
+	for(let i = 0; i < snake.length - 1; i++){
+		snake[i + 1] = {x: snakeCopy[i].x, y: snakeCopy[i].y};
 	}
-	canvasBackground.fillRect(snakePart.x , snakePart.y , 10, 10);
-	canvasBackground.strokeRect(snakePart.x , snakePart.y , 10, 10);
+	return snakeCopy;
+}
+
+function moveRight(snake, snakeCopy){
+	snake[0] = {x: snakeCopy[0].x + 10, y: snakeCopy[0].y};
+	for(let i = 0; i < snake.length - 1; i++){
+		snake[i + 1] = {x: snakeCopy[i].x, y: snakeCopy[i].y}
+	}
+	return snakeCopy;
+}
+
+function moveLeft(snake, snakeCopy){
+	snake[0] = {x: snakeCopy[0].x - 10, y: snakeCopy[0].y};
+	for(let i = 0; i < snake.length - 1; i++){
+		snake[i + 1] = {x: snakeCopy[i].x, y: snakeCopy[i].y}
+	}
+	return snakeCopy;
+}
+
+function whichKey(event, snake, snakeCopy){
+	key = event.keyCode;
+	switch(key){
+		case 37: // left arrow key
+			moveLeft(snake, snakeCopy);
+			break;
+		case 38: //  up arrow key
+			moveUp(snake, snakeCopy);
+			break;
+		case 39: // right up arrow
+			moveRight(snake, snakeCopy);
+			break;
+		case 40: // down up arrow
+			moveDown(snake, snakeCopy);
+			break;
+
+	}
 }
 
 function drawSnakePart(snakePart){
@@ -87,4 +116,3 @@ function drawFood(){
 	canvasBackground.fillRect(250,250,15,15);
 }
 
-function()
