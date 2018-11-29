@@ -8,18 +8,19 @@ window.onload = function() {
 	canvasBackground.fillStyle = 'black';
 	canvasBackground.fillRect(0,0,canvas.width,canvas.height);
 	
-	let snake = [
-		{x: 150, y: 150},
-		{x: 140, y: 150},
-		{x: 130, y: 150},
-		{x: 120, y: 150},
-		{x: 110, y: 150},
-		{x: 100, y: 150},
-		{x: 90, y: 150}
-
-	]
-
-	setInterval(function(){main(snake);},1000);	
+	let snake = {
+		direction: ['RIGHT','LEFT','UP','DOWN'],
+		body: [
+			{x: 150, y: 150},
+			{x: 140, y: 150},
+			{x: 130, y: 150},
+			{x: 120, y: 150},
+			{x: 110, y: 150},
+			{x: 100, y: 150},
+			{x: 90, y: 150}
+		]
+	}
+	setInterval(function(){main(snake);},100);	
 }
 
 function main(snake){
@@ -28,18 +29,36 @@ function main(snake){
 
 	let snakeCopy = [];
 
-	snake.forEach(function(snakePart){
+	snake.body.forEach(function(snakePart){
 		snakeCopy.push(snakePart);
 	});
 
-	snake.forEach(function(snakePart){
+	snake.body.forEach(function(snakePart){
 		drawSnakePart(snakePart);
 	});
 
 	document.onkeyup = function(event){
-		whichKey(event, snake, snakeCopy)
+		whichKey(event, snake.body, snakeCopy)
 	};
-	
+
+
+	for(let i = 0; i < snake.direction.length; i++){
+		if (snake.direction[i] === 'RIGHT') {
+			moveRight(snake.body, snakeCopy);
+		} 
+
+		if (snake.direction[i] === 'LEFT') {
+			moveLeft(snake.body, snakeCopy);
+		}
+
+		if (snake.direction[i] === 'UP') {
+			moveUp(snake.body, snakeCopy);
+		}
+
+		if (snake.direction[i] === 'DOWN') {
+			moveDown(snake.body, snakeCopy);
+		}
+	}
 }
 
 function moveUp(snake,snakeCopy){
