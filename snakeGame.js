@@ -9,7 +9,7 @@ window.onload = function() {
 	canvasBackground.fillRect(0,0,canvas.width,canvas.height);
 	
 	let snake = {
-		direction: ['RIGHT','LEFT','UP','DOWN'],
+		direction: 'RIGHT',
 		body: [
 			{x: 150, y: 150},
 			{x: 140, y: 150},
@@ -20,6 +20,9 @@ window.onload = function() {
 			{x: 90, y: 150}
 		]
 	}
+	document.onkeyup = function(event){
+		snake.direction = whichKey(event)
+	};
 	setInterval(function(){main(snake);},100);	
 }
 
@@ -36,29 +39,23 @@ function main(snake){
 	snake.body.forEach(function(snakePart){
 		drawSnakePart(snakePart);
 	});
+	
+	if (snake.direction === 'RIGHT') {
+		moveRight(snake.body, snakeCopy);
+	} 
 
-	document.onkeyup = function(event){
-		whichKey(event, snake.body, snakeCopy)
-	};
-
-
-	for(let i = 0; i < snake.direction.length; i++){
-		if (snake.direction[i] === 'RIGHT') {
-			moveRight(snake.body, snakeCopy);
-		} 
-
-		if (snake.direction[i] === 'LEFT') {
-			moveLeft(snake.body, snakeCopy);
-		}
-
-		if (snake.direction[i] === 'UP') {
-			moveUp(snake.body, snakeCopy);
-		}
-
-		if (snake.direction[i] === 'DOWN') {
-			moveDown(snake.body, snakeCopy);
-		}
+	if (snake.direction === 'LEFT') {
+		moveLeft(snake.body, snakeCopy);
 	}
+
+	if (snake.direction === 'UP') {
+		moveUp(snake.body, snakeCopy);
+	}
+
+	if (snake.direction === 'DOWN') {
+		moveDown(snake.body, snakeCopy);
+	}
+	
 }
 
 function moveUp(snake,snakeCopy){
@@ -93,22 +90,17 @@ function moveLeft(snake, snakeCopy){
 	return snakeCopy;
 }
 
-function whichKey(event, snake, snakeCopy){
+function whichKey(event){
 	key = event.keyCode;
 	switch(key){
 		case 37: // left arrow key
-			moveLeft(snake, snakeCopy);
-			break;
+			return 'LEFT';
 		case 38: //  up arrow key
-			moveUp(snake, snakeCopy);
-			break;
+			return 'UP';
 		case 39: // right up arrow
-			moveRight(snake, snakeCopy);
-			break;
+			return 'RIGHT';
 		case 40: // down up arrow
-			moveDown(snake, snakeCopy);
-			break;
-
+			return 'DOWN';
 	}
 }
 
@@ -128,10 +120,19 @@ function drawCanvas(){
 	canvasBackground.fillRect(0,0,canvas.width,canvas.height);
 }
 
+function createFood() {
+	foodX = math.floor((math.random() * 30) - 10)
+	foodY = math.floor((math.random() * 30) - 10)
+
+	snake.body.forEach(funtion isOnSnake(snakePart){
+		if (snakePart.x == foodX && snakePart.y == foodY)
+			createFood();
+	}); 
+}
+
 function drawFood(){
 	let canvas = document.getElementById('gameCanvas');
 	let canvasBackground = canvas.getContext('2d');
 	canvasBackground.fillStyle = 'red';
-	canvasBackground.fillRect(250,250,15,15);
+	canvasBackground.fillRect(foodX, foodY,15,15);
 }
-
