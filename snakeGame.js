@@ -7,7 +7,7 @@ window.onload = function() {
 	let canvasBackground = canvas.getContext('2d');
 	canvasBackground.fillStyle = 'black';
 	canvasBackground.fillRect(0,0,canvas.width,canvas.height);
-	
+
 	let snake = {
 		direction: 'RIGHT',
 		body: [
@@ -20,15 +20,22 @@ window.onload = function() {
 			{x: 90, y: 150}
 		]
 	}
+
+	let food = {
+		moving : false,
+		coordinates: {x: 190, y: 150},
+		midpoint : 10
+	}
+
 	document.onkeyup = function(event){
 		snake.direction = whichKey(event)
 	};
-	setInterval(function(){main(snake);},100);	
+	setInterval(function(){main(snake,food);},1000);	
 }
 
-function main(snake){
+function main(snake,food){
 	drawCanvas();
-	drawFood();
+	drawFood(food.coordinates.x, food.coordinates.y); 
 
 	let snakeCopy = [];
 
@@ -39,6 +46,15 @@ function main(snake){
 	snake.body.forEach(function(snakePart){
 		drawSnakePart(snakePart);
 	});
+
+	var isSnakeEatingFood = isSnakeHeadEatingFood(snake, food.coordinates.x, food.coordinates.y);
+
+	if(isSnakeEatingFood){
+		food.coordinates.x = Math.ceil((Math.random() * 500)/10) * 10
+		food.coordinates.y = Math.ceil((Math.random() * 500)/10) * 10
+	}
+
+
 	
 	if (snake.direction === 'RIGHT') {
 		moveRight(snake.body, snakeCopy);
@@ -120,19 +136,16 @@ function drawCanvas(){
 	canvasBackground.fillRect(0,0,canvas.width,canvas.height);
 }
 
-function createFood() {
-	foodX = math.floor((math.random() * 30) - 10)
-	foodY = math.floor((math.random() * 30) - 10)
-
-	snake.body.forEach(funtion isOnSnake(snakePart){
-		if (snakePart.x == foodX && snakePart.y == foodY)
-			createFood();
-	}); 
+function isSnakeHeadEatingFood(snake, foodX, foodY) {
+	return snake.body[0].x === foodX && snake.body[0].y === foodY;
 }
 
-function drawFood(){
+function drawFood(foodX,foodY){	
+	console.log("ale");
 	let canvas = document.getElementById('gameCanvas');
 	let canvasBackground = canvas.getContext('2d');
 	canvasBackground.fillStyle = 'red';
-	canvasBackground.fillRect(foodX, foodY,15,15);
+	canvasBackground.fillRect(foodX, foodY,10,10);
+	canvasBackground.strokeRect(foodX, foodY, 10, 10);
 }
+
