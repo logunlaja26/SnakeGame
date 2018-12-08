@@ -11,19 +11,14 @@ window.onload = function() {
 	let snake = {
 		direction: 'RIGHT',
 		body: [
-			{x: 150, y: 150},
-			{x: 140, y: 150},
-			{x: 130, y: 150},
-			{x: 120, y: 150},
-			{x: 110, y: 150},
-			{x: 100, y: 150},
-			{x: 90, y: 150}
+			{x: 30, y: 0},
+			{x: 20, y: 0},
+			{x: 10, y: 0}
 		]
 	}
-
 	let food = {
 		moving : false,
-		coordinates: {x: 190, y: 150},
+		coordinates: {x: 50, y: 0},
 		midpoint : 10
 	}
 
@@ -50,8 +45,17 @@ function main(snake,food){
 	var isSnakeEatingFood = isSnakeHeadEatingFood(snake, food.coordinates.x, food.coordinates.y);
 
 	if(isSnakeEatingFood){
-		food.coordinates.x = Math.ceil((Math.random() * 500)/10) * 10
-		food.coordinates.y = Math.ceil((Math.random() * 500)/10) * 10
+		food.coordinates.x = Math.ceil((Math.random() * 60)/10) * 10
+		food.coordinates.y = Math.ceil((Math.random() * 10)/10) * 10
+	}
+
+	for(var l = 0; l < snake.body.length; l++){
+		if (snake.body[l].x === food.coordinates.x && snake.body[l].y === food.coordinates.y){
+			food.coordinates.x = Math.ceil((Math.random() * 60)/10) * 10
+			food.coordinates.x = Math.ceil((Math.random() * 10)/10) * 10
+		} else {
+			drawFood(food.coordinates.x, food.coordinates.y);
+		}
 	}
 
 
