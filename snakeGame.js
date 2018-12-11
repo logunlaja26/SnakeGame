@@ -30,7 +30,7 @@ window.onload = function() {
 	document.onkeyup = function(event){
 		snake.direction = whichKey(event)
 	};
-	setInterval(function(){main(snake,food);},1000);	
+	setInterval(function(){main(snake,food);},100);	
 }
 
 function main(snake,food){
@@ -54,6 +54,10 @@ function main(snake,food){
 		food.coordinates.y = Math.ceil((Math.random() * 500)/10) * 10
 	}
 
+	if(isSnakeEatingFood){
+		let head = {x: snake.body[0].x, y: snake.body[0].y};
+		snake.body.unshift(head);
+	}
 
 	
 	if (snake.direction === 'RIGHT') {
@@ -141,7 +145,6 @@ function isSnakeHeadEatingFood(snake, foodX, foodY) {
 }
 
 function drawFood(foodX,foodY){	
-	console.log("ale");
 	let canvas = document.getElementById('gameCanvas');
 	let canvasBackground = canvas.getContext('2d');
 	canvasBackground.fillStyle = 'red';
