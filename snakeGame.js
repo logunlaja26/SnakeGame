@@ -2,12 +2,6 @@ var canvas; // variable holds contextual aspects of game canvas
 var canvasBackground; // variable keeps track of actual objects of the canvas
 
 window.onload = function() {
-	console.log("SnakeGame");			
-	let canvas = document.getElementById('gameCanvas');
-	let canvasBackground = canvas.getContext('2d');
-	canvasBackground.fillStyle = 'black';
-	canvasBackground.fillRect(0,0,canvas.width,canvas.height);
-
 	let snake = {
 		direction: 'RIGHT',
 		body: [
