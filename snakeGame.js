@@ -2,6 +2,7 @@ var canvas; // variable holds contextual aspects of game canvas
 var canvasBackground; // variable keeps track of actual objects of the canvas
 
 window.onload = function() {
+	let score = 0;
 	let snake = {
 		direction: 'RIGHT',
 		body: [
@@ -24,12 +25,12 @@ window.onload = function() {
 	document.onkeyup = function(event){
 		snake.direction = whichKey(event)
 	};
-	setInterval(function(){main(snake,food);},100);	
+	setInterval(function(){main(snake, food, score);},100);
 }
 
-function main(snake,food){
+function main(snake,food,score){
 	drawCanvas();
-	drawFood(food.coordinates.x, food.coordinates.y); 
+	drawFood(food.coordinates.x, food.coordinates.y);
 
 	let snakeCopy = [];
 
@@ -51,12 +52,16 @@ function main(snake,food){
 	if(isSnakeEatingFood){
 		let head = {x: snake.body[0].x, y: snake.body[0].y};
 		snake.body.unshift(head);
+
+		score += 100;
+		document.getElementById('score').innerHTML = score;
+
 	}
 
-	
+
 	if (snake.direction === 'RIGHT') {
 		moveRight(snake.body, snakeCopy);
-	} 
+	}
 
 	if (snake.direction === 'LEFT') {
 		moveLeft(snake.body, snakeCopy);
@@ -69,7 +74,7 @@ function main(snake,food){
 	if (snake.direction === 'DOWN') {
 		moveDown(snake.body, snakeCopy);
 	}
-	
+
 }
 
 function moveUp(snake,snakeCopy){
@@ -138,11 +143,10 @@ function isSnakeHeadEatingFood(snake, foodX, foodY) {
 	return snake.body[0].x === foodX && snake.body[0].y === foodY;
 }
 
-function drawFood(foodX,foodY){	
+function drawFood(foodX,foodY){
 	let canvas = document.getElementById('gameCanvas');
 	let canvasBackground = canvas.getContext('2d');
 	canvasBackground.fillStyle = 'red';
 	canvasBackground.fillRect(foodX, foodY,10,10);
 	canvasBackground.strokeRect(foodX, foodY, 10, 10);
 }
-
