@@ -53,7 +53,7 @@ function main(snake,food,score){
 		let head = {x: snake.body[0].x, y: snake.body[0].y};
 		snake.body.unshift(head);
 
-		score += 100;
+		score += 10;
 		document.getElementById('score').innerHTML = score;
 
 	}
@@ -75,7 +75,27 @@ function main(snake,food,score){
 		moveDown(snake.body, snakeCopy);
 	}
 
+	var isSnakeGameOver = didSnakeGameEnd(snake, gameCanvas);
+  console.log('did snake game end: ', isSnakeGameOver)
+
+  if (isSnakeGameOver) {
+    return;
+  }
 }
+
+function didSnakeGameEnd(snake , gameCanvas){
+  for (let i = 4; i < snake.length; i++){
+    let didCollide = snake[i].x === snake[0].x && snake[i].y === snake[0].y
+    if (didCollide) return true
+    }
+
+    let hitLeftWall = snake.body[0].x < 0;
+    let hitRightWall = snake.body[0].x > gameCanvas.canvas.width - 10;
+    let hitTopWall = snake.body[0].y < 0;
+    let hitBottomWall = snake.body[0].y > gameCanvas.canvas.height - 10;
+
+    return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall
+  }
 
 function moveUp(snake,snakeCopy){
 	snake[0] = {x: snakeCopy[0].x, y: snakeCopy[0].y - 10};
