@@ -53,7 +53,7 @@ function main(snake,food,score, gameInterval){
 		snake.body.unshift(head);
 
 		score += 10;
-		document.getElementById('score').innerHTML = score;
+		document.getElementById('score').innerHTML = "Game Score: " + score;
 
 	}
 
@@ -75,8 +75,7 @@ function main(snake,food,score, gameInterval){
 	}
 
 	var isSnakeGameOver = didSnakeGameEnd(snake, gameCanvas);
-  console.log('did snake game end: ', isSnakeGameOver)
-
+  
   if (isSnakeGameOver) {
     clearInterval(gameInterval);
   }
