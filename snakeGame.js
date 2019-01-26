@@ -9,10 +9,7 @@ window.onload = function() {
 			{x: 150, y: 150},
 			{x: 140, y: 150},
 			{x: 130, y: 150},
-			{x: 120, y: 150},
-			{x: 110, y: 150},
-			{x: 100, y: 150},
-			{x: 90, y: 150}
+			{x: 120, y: 150}
 		]
 	}
 
@@ -25,10 +22,12 @@ window.onload = function() {
 	document.onkeyup = function(event){
 		snake.direction = whichKey(event)
 	};
-	setInterval(function(){main(snake, food, score);},100);
+	var gameInterval = setInterval(
+		function(){main(snake, food, score, gameInterval);},
+		100);
 }
 
-function main(snake,food,score){
+function main(snake,food,score, gameInterval){
 	drawCanvas();
 	drawFood(food.coordinates.x, food.coordinates.y);
 
@@ -79,7 +78,7 @@ function main(snake,food,score){
   console.log('did snake game end: ', isSnakeGameOver)
 
   if (isSnakeGameOver) {
-    return;
+    clearInterval(gameInterval);
   }
 }
 
@@ -90,9 +89,9 @@ function didSnakeGameEnd(snake , gameCanvas){
     }
 
     let hitLeftWall = snake.body[0].x < 0;
-    let hitRightWall = snake.body[0].x > gameCanvas.canvas.width - 10;
+    let hitRightWall = snake.body[0].x > gameCanvas.width - 10;
     let hitTopWall = snake.body[0].y < 0;
-    let hitBottomWall = snake.body[0].y > gameCanvas.canvas.height - 10;
+    let hitBottomWall = snake.body[0].y > gameCanvas.height - 10;
 
     return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall
   }
