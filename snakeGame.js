@@ -2,7 +2,9 @@ var canvas; // variable holds contextual aspects of game canvas
 var canvasBackground; // variable keeps track of actual objects of the canvas
 
 window.onload = function() {
-	let score = 0;
+	let score = {
+		total:0
+	};
 	let snake = {
 		direction: 'RIGHT',
 		body: [
@@ -25,6 +27,7 @@ window.onload = function() {
 	var gameInterval = setInterval(
 		function(){main(snake, food, score, gameInterval);},
 		100);
+
 }
 
 function main(snake,food,score, gameInterval){
@@ -52,9 +55,8 @@ function main(snake,food,score, gameInterval){
 		let head = {x: snake.body[0].x, y: snake.body[0].y};
 		snake.body.unshift(head);
 
-		score += 10;
-		document.getElementById('score').innerHTML = "Game Score: " + score;
-
+		score.total += 10;
+		document.getElementById('score').innerHTML = "Game Score: " + score.total;
 	}
 
 
@@ -75,10 +77,11 @@ function main(snake,food,score, gameInterval){
 	}
 
 	var isSnakeGameOver = didSnakeGameEnd(snake, gameCanvas);
-  
+
   if (isSnakeGameOver) {
     clearInterval(gameInterval);
   }
+
 }
 
 function didSnakeGameEnd(snake , gameCanvas){
