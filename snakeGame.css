@@ -1,0 +1,12 @@
+body{
+  background-color: grey;
+}
+
+#gameCanvas{
+  display: block;
+  margin: 0 auto;
+}
+
+#score{
+  text-align: center;
+}
